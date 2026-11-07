@@ -57,6 +57,7 @@ Item {
         interval: 1000
         repeat: true
         running: root.isPlaying && full.length > 0 && !seekBar.dragging
+                 && (root.expanded || !root.inPanel)
         onTriggered: {
             const next = full.position + 1000000 * (root.player?.rate ?? 1)
             if (next >= full.length) root.player?.updatePosition()
@@ -83,20 +84,18 @@ Item {
         shadow.color: Qt.rgba(0, 0, 0, 0.45)
     }
 
+    // Sin capa ni máscara sobre toda la tarjeta: cada fondo se redondea por sí
+    // mismo, así las animaciones del contenido no obligan a redibujarla entera.
     Item {
         id: card
         anchors.fill: cardShadow
-        layer.enabled: true
-        layer.effect: MultiEffect {
-            maskEnabled: true
-            maskSource: cardMask
-            maskThresholdMin: 0.5
-            maskSpreadAtMin: 1.0
-        }
+
+        HoverHandler { id: cardHover }
 
         // Fondo base teñido con el acento (se ve sin portada)
         Rectangle {
             anchors.fill: parent
+            radius: full.cardRadius
             gradient: Gradient {
                 orientation: Gradient.Horizontal
                 GradientStop { position: 0; color: Qt.darker(full.accent, 2.6) }
@@ -115,12 +114,18 @@ Item {
             asynchronous: true
             visible: false
         }
+        // Blur y esquinas redondeadas en un solo efecto. La fuente es estática,
+        // así que el desenfoque solo se recalcula al cambiar de portada.
         MultiEffect {
             anchors.fill: parent
             source: bgArt
             blurEnabled: true
             blur: 1.0
-            blurMax: 64
+            blurMax: 48
+            maskEnabled: true
+            maskSource: cardMask
+            maskThresholdMin: 0.5
+            maskSpreadAtMin: 1.0
             autoPaddingEnabled: false
             saturation: 0.25
             brightness: -0.05
@@ -130,6 +135,7 @@ Item {
         // Velo oscuro para que el texto siempre se lea
         Rectangle {
             anchors.fill: parent
+            radius: full.cardRadius
             gradient: Gradient {
                 GradientStop { position: 0; color: Qt.rgba(0, 0, 0, 0.30) }
                 GradientStop { position: 1; color: Qt.rgba(0, 0, 0, 0.62) }
@@ -249,8 +255,10 @@ Item {
                         elide: Text.ElideRight
                         Layout.maximumWidth: full.gu * 8
                     }
+                    // Solo se anima al pasar el mouse: una animación infinita
+                    // obliga a Plasma a redibujar el escritorio sin parar.
                     Equalizer {
-                        running: root.isPlaying
+                        running: root.isPlaying && cardHover.hovered
                         color: full.accent
                         barWidth: 2
                         maxHeight: 10

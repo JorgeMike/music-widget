@@ -21,7 +21,8 @@ Row {
             width: eq.barWidth
             radius: width / 2
             color: eq.color
-            height: eq.maxHeight * 0.3
+            // En reposo cada barra queda a una altura distinta: sigue pareciendo un ecualizador
+            height: eq.maxHeight * modelData * 0.75
 
             SequentialAnimation on height {
                 running: eq.running
@@ -36,7 +37,7 @@ Row {
                     duration: 260 + index * 90
                     easing.type: Easing.InOutSine
                 }
-                onStopped: parent.height = eq.maxHeight * 0.3
+                onStopped: parent.height = eq.maxHeight * modelData * 0.75
             }
         }
     }

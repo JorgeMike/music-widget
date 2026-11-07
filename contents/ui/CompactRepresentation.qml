@@ -47,7 +47,7 @@ MouseArea {
 
             Equalizer {
                 anchors.centerIn: parent
-                running: root.isPlaying
+                running: false   // barras quietas en el panel: cero redibujos
                 barWidth: Math.max(2, Math.round(thumb.width / 12))
                 maxHeight: thumb.height * 0.45
             }

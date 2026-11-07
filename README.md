@@ -19,12 +19,16 @@ El fondo y el color de la barra de progreso se adaptan a cada portada.
 - Rueda del mouse sobre el widget para subir o bajar el volumen (sale el OSD de Plasma).
 - Clic en la portada para traer al frente la app que está sonando.
 - Si tienes varias apps reproduciendo, aparecen sus íconos arriba a la derecha para cambiar entre ellas.
-- **En el panel** se ve la miniatura de la portada con barritas animadas:
+- **En el panel** se ve la miniatura de la portada con barritas de ecualizador:
   - Clic: abre la tarjeta completa.
   - Clic medio: play/pausa.
   - Rueda: volumen.
   - Botones atrás/adelante del mouse: canción anterior/siguiente.
   - Se oculta solo cuando no hay nada sonando.
+
+## Consumo
+
+Sin animaciones continuas: las barritas solo se mueven al pasar el mouse, y el blur del fondo se calcula una vez por portada. Con música sonando usa ~0% de CPU en reposo.
 
 ## Requisitos
 
@@ -73,4 +77,4 @@ kpackagetool6 --type Plasma/Applet --remove local.musicplayer
 | `contents/ui/SeekBar.qml` | Barra de progreso |
 | `contents/ui/ControlButton.qml` | Botones redondos |
 | `contents/ui/RoundedImage.qml` | Portada con esquinas redondeadas |
-| `contents/ui/Equalizer.qml` | Barritas animadas |
+| `contents/ui/Equalizer.qml` | Barritas de ecualizador (se animan al pasar el mouse) |
