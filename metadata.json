@@ -1,0 +1,16 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            { "Name": "Miguel", "Email": "miguel.alvarado.dev@gmail.com" }
+        ],
+        "Category": "Multimedia",
+        "Description": "Reproductor de música moderno: portada, progreso y controles para cualquier app compatible con MPRIS",
+        "Icon": "multimedia-player",
+        "Id": "local.musicplayer",
+        "License": "MIT",
+        "Name": "Reproductor de música",
+        "Version": "1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
