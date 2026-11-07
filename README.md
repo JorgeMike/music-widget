@@ -26,6 +26,20 @@ El fondo y el color de la barra de progreso se adaptan a cada portada.
   - Botones atrás/adelante del mouse: canción anterior/siguiente.
   - Se oculta solo cuando no hay nada sonando.
 
+## Estilos
+
+Clic derecho en el widget → **Configurar** → **Apariencia**:
+
+- **Plasma**: componentes y colores de tu tema (respeta claro/oscuro, el color de acento y el fondo normal de los widgets). Se ve como los widgets que trae KDE.
+- **Moderno** (por defecto): tarjeta oscura con efectos.
+
+Solo se carga el diseño elegido: cada estilo vive en su propio archivo (`FullRepresentationPlasma.qml`, `FullRepresentationModern.qml`, …) y `StyleLoader.qml` abre únicamente el que toca.
+
+### Agregar un estilo nuevo
+
+1. Crea `contents/ui/FullRepresentation<Nombre>.qml` y `contents/ui/CompactRepresentation<Nombre>.qml`. Toman los datos y acciones de `root` (definidos en `main.qml`).
+2. Agrega la opción en `contents/ui/configAppearance.qml` y su nombre en `StyleLoader.qml`.
+
 ## Consumo
 
 Sin animaciones continuas: las barritas solo se mueven al pasar el mouse, y el blur del fondo se calcula una vez por portada. Con música sonando usa ~0% de CPU en reposo.
@@ -72,8 +86,12 @@ kpackagetool6 --type Plasma/Applet --remove local.musicplayer
 | Archivo | Para qué |
 |---|---|
 | `contents/ui/main.qml` | Conexión con MPRIS y acciones (play, siguiente, volumen…) |
-| `contents/ui/FullRepresentation.qml` | La tarjeta completa |
-| `contents/ui/CompactRepresentation.qml` | La miniatura del panel |
+| `contents/ui/FullRepresentationModern.qml` | La tarjeta completa (estilo moderno) |
+| `contents/ui/CompactRepresentationModern.qml` | La miniatura del panel (estilo moderno) |
+| `contents/ui/FullRepresentationPlasma.qml` | La vista completa (estilo Plasma) |
+| `contents/ui/CompactRepresentationPlasma.qml` | El ícono del panel (estilo Plasma) |
+| `contents/ui/StyleLoader.qml` | Carga solo el estilo elegido |
+| `contents/ui/configAppearance.qml` | Pantalla de configuración |
 | `contents/ui/SeekBar.qml` | Barra de progreso |
 | `contents/ui/ControlButton.qml` | Botones redondos |
 | `contents/ui/RoundedImage.qml` | Portada con esquinas redondeadas |

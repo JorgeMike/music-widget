@@ -57,7 +57,11 @@ PlasmoidItem {
 
     Plasmoid.icon: isPlaying ? "media-playback-playing" : "multimedia-player"
     Plasmoid.title: "Reproductor de música"
-    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
+    // Estilo Plasma: fondo normal del tema (configurable). Moderno: dibuja su propia tarjeta.
+    readonly property bool plasmaStyle: Plasmoid.configuration.style === "plasma"
+    Plasmoid.backgroundHints: plasmaStyle
+        ? PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
+        : PlasmaCore.Types.NoBackground
     // En el panel o la bandeja se oculta cuando no hay nada sonando.
     Plasmoid.status: hasMedia ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
 
@@ -69,6 +73,6 @@ PlasmoidItem {
                                  || Plasmoid.formFactor === PlasmaCore.Types.Vertical
     preferredRepresentation: inPanel ? compactRepresentation : fullRepresentation
 
-    compactRepresentation: CompactRepresentation {}
-    fullRepresentation: FullRepresentation {}
+    compactRepresentation: StyleLoader { base: "CompactRepresentation" }
+    fullRepresentation: StyleLoader { base: "FullRepresentation" }
 }
