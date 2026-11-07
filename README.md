@@ -4,11 +4,19 @@ Plasmoide con un reproductor moderno para cualquier app compatible con MPRIS: Sp
 
 ## Capturas
 
+### Estilo moderno
+
 | Portada oscura | Portada clara |
 |---|---|
-| ![Widget reproduciendo Dangerous](screenshots/widget-1.png) | ![Widget reproduciendo Clima Tropical](screenshots/widget-2.png) |
+| ![Estilo moderno reproduciendo Dangerous](screenshots/widget-1.png) | ![Estilo moderno reproduciendo Clima Tropical](screenshots/widget-2.png) |
 
 El fondo y el color de la barra de progreso se adaptan a cada portada.
+
+### Estilo Plasma
+
+![Estilo Plasma](screenshots/plasma.png)
+
+Usa los componentes y colores de tu tema de Plasma.
 
 ## Qué hace
 
